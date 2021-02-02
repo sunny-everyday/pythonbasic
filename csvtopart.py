@@ -47,6 +47,6 @@ def Data_split(filename,file_num,header=True):
                  print('保存第{0}个数据'.format(i))
                  i+=1
 
-filename='D:/test/LoggedData_21_01_27_09_38_14_StrainData5.csv'
-num=10
+filename='D:/test/LoggedData_21_02_02_09_22_54_StrainData.csv'
+num=2
 Data_split(filename,num,header=True)

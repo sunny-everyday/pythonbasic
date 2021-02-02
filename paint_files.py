@@ -22,61 +22,58 @@ def opensmallfileforpaint(filename):
         strainX = strainY = strainZ = strainEX = strainEY = strainEZ = 0.0
         index = 1
         for row in reader:
-            for i in range(200):
-                strainX += float(row[3])
-                strainY += float(row[4])
-                strainZ += float(row[5])
-                strainEX += float(row[6])
-                strainEY += float(row[7])
-                strainEZ += float(row[8])
-            strainX = strainX / 200
-            strainY = strainY / 200
-            strainZ = strainZ / 200
-            strainEX = strainEX / 200
-            strainEY = strainEY / 200
-            strainEZ = strainEZ / 200
-            substrainX = float(row[3])
+            StrainX.append(float(row[3]))
+            StrainY.append(float(row[4]))
+            StrainZ.append(float(row[5]))
+            StrainEX.append(float(row[6]))
+            StrainEY.append(float(row[7]))
+            StrainEZ.append(float(row[8]))
 
             #datetime_obj = datetime.strptime("2021-01-01 "+row[0], "%Y-%m-%d %H:%M:%S:%f")
             #microtime = time.mktime(datetime_obj.timetuple())*1000 + datetime_obj.microsecond / 1000.0
-
             historytime.append(index)
-            StrainX.append(strainX)
-            StrainY.append(strainY)
-            StrainZ.append(strainZ)
-            StrainEX.append(strainEX)
-            StrainEY.append(strainEY)
-            StrainEZ.append(strainEZ)
-            SubStrainX.append(substrainX)
             index += 1
     # 根据数据绘制图形
-    plt.subplot(311)
-    plt.title("Strdal-strain-drawing", fontsize=24)
-    #plt.plot(historytime, StrainX, c='red', label='MAP')
+    plt.figure(figsize=(16, 16))
+    plt.subplot(611)
+    plt.title("strain-drawing", fontsize=24)
     plt.plot(historytime, StrainX, c='red', label='MAP')
-    #plt.plot(historytime, StrainY, c='green', label='MAP')
-    #plt.plot(historytime, StrainZ, c='blue', label='MAP')
     plt.xlabel('historytime')
     plt.ylabel("StrainX")
-    plt.subplot(312)
+    plt.subplot(612)
     plt.plot(historytime, StrainY, c='green', label='MAP')
     plt.xlabel('historytime')
     plt.ylabel("StrainY")
-    plt.subplot(313)
+    plt.subplot(613)
     plt.plot(historytime, StrainZ, c='blue', label='MAP')
     plt.xlabel('historytime')
     plt.ylabel("StrainZ")
     photoname = filename.replace('.csv', 'E.png')
+
+    plt.subplot(614)
+    plt.plot(historytime, StrainEX, c='red', label='MAP')
+    plt.xlabel('historytime')
+    plt.ylabel("StrainEX")
+    plt.subplot(615)
+    plt.plot(historytime, StrainEY, c='green', label='MAP')
+    plt.xlabel('historytime')
+    plt.ylabel("StrainEY")
+    plt.subplot(616)
+    plt.plot(historytime, StrainEZ, c='blue', label='MAP')
+    plt.xlabel('historytime')
+    plt.ylabel("StrainEZ")
+    photoname = filename.replace('.csv', 'E.png')
     print(photoname)
     plt.savefig(photoname)
+
     plt.show()
 
-filedir =  'LoggedData_21_01_27_09_38_14_StrainData5.csv'
+filedir =  'LoggedData_21_02_02_09_22_54_StrainData.csv'
 def getpaints():
-    for i in range(10):
+    for i in range(2):
         filename = "D:/" + "test_" + str(i) + filedir
         opensmallfileforpaint(filename)
 
-#getpaints()
-filename = 'D:/test/LoggedData_21_01_27_09_38_14_StrainData5.csv'
-opensmallfileforpaint(filename)
+getpaints()
+#filename = 'D:/test/LoggedData_21_01_29_16_49_09_StrainData.csv'
+#opensmallfileforpaint(filename)
